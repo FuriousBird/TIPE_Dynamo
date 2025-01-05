@@ -33,7 +33,7 @@ points les plus intéressants: interesting_mes.txt
 ![une mesure correcte avec un bon nombre de périodes](viz/gcope_27.jpg)
 
 après labellisation avec mon outil: `pipeline/labeling`
-on peut calculer la vitesse du vélo par rapport à la route 2*pi*R/T avec T la période de rotation et R le rayon de la roue\
+on peut calculer la vitesse du vélo par rapport à la route 2\*pi\*R/T avec T la période de rotation et R le rayon de la roue\
 si on scatter les amplitudes de chaque mesure intéressante en fonction de la vitesse on obtient des droites de pente égale:
 
 ![](scatter_interessants.png)
