@@ -24,7 +24,8 @@ for fp in data_files:
     with open(join(LABEL_DIR,fp)) as f:
         labels = f.readlines()
         labels = [process(x) for x in labels]
-    signal = read_np(fp.split(".")[0]+".csv", DATA_DIR)
+    nametag = fp.split(".")[0]
+    signal = read_np(nametag+".csv", DATA_DIR)
     amps = []
     T = []  
     for i in range(len(labels)-1):
@@ -34,10 +35,11 @@ for fp in data_files:
         T.append(x2-x1)
     V = [per/t*3.6 for t in T]
     IT = [1/t for t in T]
-    plt.scatter(V, amps)
+    plt.scatter(V, amps, label=nametag)
 
 # plt.title("fp: "+fp)
 plt.xlabel("Vitesse au sol(km/h)")
 plt.ylabel("Amplitude sur Tour")
 plt.tight_layout()
+plt.legend()
 plt.show()

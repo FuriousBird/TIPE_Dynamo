@@ -36,8 +36,6 @@ bck = pygame.transform.smoothscale(bck, (W,H))
 ddl1 = tp.DropDownListButton(["None"] + data_files)
 ddl1_labelled = tp.Labelled("Fichier Source", ddl1)
 
-alert = tp.Alert("Congratulations", "That was a nice click.\nNo, really, you performed well.")
-
 prevname = None
 signal = None
 def update_sig():
@@ -47,9 +45,8 @@ def update_sig():
     if name is None or name == prevname:
         return
     if name == "None":
-        print("ALERT!!!")
+        signal = None
         prevname = None
-        alert.launch_alone(click_outside_cancel=True) #tune some options if you like
         return
     print("Name:",name)
     prevname = name
@@ -60,6 +57,34 @@ def update_sig():
     val_max = signal[:,1].max()
     val_min = signal[:,1].min()
     markers = []
+
+def time_volt_to_rel(val_min, val_max, time_min, time_max, val, time):
+    relx = (time-time_min)/(time_max-time_min)-0.5
+    rely = (val-val_min)/(val_max-val_min)-0.5
+    return relx, rely
+
+def rel_to_time_volt(relx,rely):
+    time = (relx+0.5)*(time_max-time_min)+time_min
+    val = (rely+0.5)*(val_max-val_min)+val_min
+    return time,val
+
+def rel_to_screen(x,y):
+    sx = PW*(x*plot_scale+0.5)+PX-plot_loc[0]*plot_scale
+    sy = PH*(-y*plot_scale+0.5)+PY-plot_loc[1]*plot_scale
+    return sx,sy
+
+def screen_to_rel(sx,sy):#seems ok assuming rel_to_screen
+    relx = ((sx-PX+plot_loc[0]*plot_scale)/PW-0.5)/plot_scale
+    rely = -((sy-PY+plot_loc[1]*plot_scale)/PH-0.5)/plot_scale
+    return relx,rely
+
+def time_volt_to_screen(val_min, val_max, time_min, time_max, val, time):
+    relx,rely = time_volt_to_rel(val_min, val_max, time_min, time_max, val, time)
+    return rel_to_screen(relx,rely)
+
+def screen_to_time_volt(x, y):
+    relx, rely = screen_to_rel(x, y)
+    return rel_to_time_volt(relx, rely)
 
 ddl1.at_change = update_sig
 
@@ -93,7 +118,11 @@ def blit_be4_gui():
     screen.fill((255,255,255))
 
 plot_zone = PX, PY, PW, PH = (0,100,1200,600)
-plot_scale = 1
+plot_loc = [0,0]
+scale_opt = [0.5,1,1.5,2,3,4,5,8,10]
+DEFAULT_SCALE_IDX = 1
+scale_index = DEFAULT_SCALE_IDX
+plot_scale = scale_opt[DEFAULT_SCALE_IDX]
 
 updater = group.get_updater()
 clock = pygame.time.Clock()
@@ -101,10 +130,39 @@ playing = True
 while updater.playing:
     clock.tick(60)
     events = pygame.event.get()
+    pressed = pygame.key.get_pressed()
     mouse_rel = pygame.mouse.get_rel()
     for e in events:
         if e.type == pygame.QUIT:
             playing = False
+        if e.type == pygame.KEYDOWN:
+            if e.key == pygame.K_HOME:
+                plot_scale = 1
+                scale_index = DEFAULT_SCALE_IDX
+                plot_loc = [0,0]
+            if e.key == pygame.K_UP:
+                scale_index +=1
+                if scale_index >= len(scale_opt):
+                    scale_index = len(scale_opt)-1
+                plot_scale = scale_opt[scale_index]
+            if e.key == pygame.K_DOWN:
+                scale_index -=1
+                if scale_index < 0:
+                    scale_index = 0
+                
+                plot_scale = scale_opt[scale_index]
+
+                print("Scale:",plot_scale, "Index:",scale_index, "Loc:",plot_loc)
+            if e.key == pygame.K_LEFT:
+                if pressed[pygame.K_LSHIFT] or pressed[pygame.K_RSHIFT]:
+                    plot_loc[0] -= 40
+                else:
+                    plot_loc[0] -= 400
+            if e.key == pygame.K_RIGHT:
+                if pressed[pygame.K_LSHIFT] or pressed[pygame.K_RSHIFT]:
+                    plot_loc[0] += 40
+                else:
+                    plot_loc[0] += 400
         if e.type == pygame.MOUSEBUTTONUP:
             print("Mouse up")
             #get location of mouse within the plot_zone
@@ -112,8 +170,7 @@ while updater.playing:
             if (prevname is not None) and (PX<=x<=PX+PW and PY<=y<=PY+PH):
                 print("Mouse up in plot_zone")
                 #convert to time and value
-                time = (x-PX)/(PW/(time_max-time_min))+time_min
-                value = val_max-(y-PY)/(PH/(val_max-val_min))
+                time,value = screen_to_time_volt(x,y)
                 print("Time:",time)
                 print("Value:",value)
                 #add/remove a marker
@@ -121,9 +178,8 @@ while updater.playing:
                 for marker in markers:
                     #convert marker to screen coords
                     mx,my = marker
-                    mx = (mx-time_min)/(time_max-time_min)*PW+PX
-                    my = PH-(my-val_min)/(val_max-val_min)*PH+PY
-                    if (mx-x)**2+(my-y)**2 <= 40:
+                    sx,sy = time_volt_to_screen(val_min, val_max, time_min, time_max, my, mx)
+                    if (sx-x)**2+(sy-y)**2 <= 40:
                         markers.remove(marker)
                         existing = True
                         break
@@ -143,15 +199,17 @@ while updater.playing:
         #show markers
         for marker in markers:
             mx,my = marker
-            mx = (mx-time_min)/(time_max-time_min)*PW+PX
-            my = PH-(my-val_min)/(val_max-val_min)*PH+PY
-            pygame.draw.circle(screen, (10,10,10), (int(mx),int(my)), 5)
+            sx,sy = time_volt_to_screen(val_min, val_max, time_min, time_max, my, mx)
+            pygame.draw.circle(screen, (10,10,10), (int(sx),int(sy)), 5)
         #showsignal
         newsig = np.copy(signal)
         ampx = PW/(time_max-time_min)
         ampy = PH/(val_max-val_min)
-        newsig[:,0] = (signal[:,0]-time_min)*ampx+PX
-        newsig[:,1] = PH-(signal[:,1]-val_min)*ampy+PY
+
+        newsig[:,0], newsig[:,1] = time_volt_to_screen(val_min, val_max, time_min, time_max, newsig[:,1], newsig[:,0])
+
+        # newsig[:,0] = (((signal[:,0]-time_min)*ampx-PW/2)*plot_scale + PW/2)+PX-plot_loc[0]*plot_scale
+        # newsig[:,1] = (PH/2-(signal[:,1]-val_min)*ampy)*plot_scale+PH/2+PY-plot_loc[1]*plot_scale
         pygame.draw.aalines(screen, (0,0,0), False, tuple(newsig), 2)
     
 
