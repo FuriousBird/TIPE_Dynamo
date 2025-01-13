@@ -16,7 +16,7 @@ with open("../interesting_mes.txt") as f:
     interesting_mes = [x.strip() for x in interesting_mes]
 
 data_files = [f for f in data_files if f.split(".")[0] in interesting_mes]
-
+data_files.sort()
 print(data_files)
 
 pygame.init()

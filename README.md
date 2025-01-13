@@ -37,3 +37,5 @@ on peut calculer la vitesse du vélo par rapport à la route 2\*pi\*R/T avec T l
 si on scatter les amplitudes de chaque mesure intéressante en fonction de la vitesse on obtient des droites de pente égale:
 
 ![](scatter_interessants.png)
+
+![](assets/ampl_vitesse.png)

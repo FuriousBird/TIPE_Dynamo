@@ -12,3 +12,10 @@ mesure_loin_1
 mesure_loin_2
 mesure_loin_3
 mesure_loin_4
+mesure_med_1
+mesure_med_2
+mesure_med_3
+mesure_med_4
+mesure_med_5
+mesure_med_6
+
