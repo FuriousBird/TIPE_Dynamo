@@ -5,11 +5,12 @@ from os.path import join
 
 DATDIR = "data"
 
-def read_dat(file_name, dat_dir=DATDIR):
+def read_dat(file_name, dat_dir=DATDIR, sep=",", decimal=".", dropna=True, dropna_cols=["1", "2"]):
     path = join(dat_dir, file_name)    
-    df = pd.read_csv(path, sep=",", skiprows=[1], dtype=np.float64)
+    df = pd.read_csv(path, sep=sep, decimal=decimal, skiprows=[1], dtype=np.float64)
     df = df.drop(0)
-    df = df.dropna(subset=["1", "2"])
+    if dropna:
+        df = df.dropna(subset=dropna_cols)
     df = df.rename(columns={"x-axis": "Time", "1": "S1", "2": "S2"})
     return df
 

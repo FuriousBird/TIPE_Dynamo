@@ -3,3 +3,12 @@ gcope_28
 gcope_24
 zcope_11
 zcope_19
+1
+2
+mesure_proche_1
+mesure_proche_2
+mesure_proche_3
+mesure_loin_1
+mesure_loin_2
+mesure_loin_3
+mesure_loin_4
