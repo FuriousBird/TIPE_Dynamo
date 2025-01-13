@@ -13,11 +13,11 @@ def read_dat(file_name, dat_dir=DATDIR):
     df = df.rename(columns={"x-axis": "Time", "1": "S1", "2": "S2"})
     return df
 
-def read_np(file_name, dat_dir=DATDIR):
+def read_np(file_name, dat_dir=DATDIR, rows_skip=1):
     path = join(dat_dir, file_name)
     with open(path, "r", encoding="utf-8") as f:
         lines = f.readlines()
-    lines =[list(map(float, z)) for x in lines[2:] if (y:=x.strip())!="" and (not "" in (z:=y.split(",")))]
+    lines =[list(map(float, z)) for x in lines[rows_skip:] if (y:=x.strip())!="" and (not "" in (z:=y.split(",")))]
     return np.array(lines)
 
 
