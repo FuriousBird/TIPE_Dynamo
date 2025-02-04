@@ -1,29 +1,13 @@
 import shutil
 from os.path import join, isfile, isdir
-import os
+import os,json
 
 DATA_ROOT = "../"
 DATA_OUT = join(DATA_ROOT, "data")
 DEFAULT_SEP = ","
 DEFAULT_DEC = "."
-SOURCES = [
-    {"name":"data_oscillo",
-     "date":"dec 16 2024",
-     "description":"premieres mesures, problemes de déclenchement",
-     "columns":["T", "V1", "V2"],
-     "sep":",",
-     "dec":".",
-    #  "to_numpy":read_np,
-    },
-    {"name":"data_sysam",
-     "date":"jan 6 2025",
-     "description":"mesures de test sur une carte d'acquisition du lycée",
-     "columns":["T", "V1"],
-     "sep":";",
-     "dec":",",
-    #  "to_numpy":read_np_sysam,
-    }
-]
+with open(join(DATA_ROOT, "sources.json"), "r", encoding="utf-8") as file:
+    SOURCES = json.load(file)
 
 def read_generator(path, rows_2_skip=0, sep=",", dec="."):
     with open(path, "r", encoding="utf-8") as file:

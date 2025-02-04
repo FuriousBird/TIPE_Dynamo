@@ -1,0 +1,26 @@
+[
+    {
+        "name":"data_oscillo",
+        "date":"dec 16 2024",
+        "description":"premieres mesures, problemes de déclenchement",
+        "columns":["T", "V1", "V2"],
+        "sep":",",
+        "dec":"."
+    },
+    {
+        "name":"data_sysam/06_01_2025",
+        "date":"jan 6 2025",
+        "description":"mesures de test sur une carte d'acquisition du lycée",
+        "columns":["T", "V1"],
+        "sep":";",
+        "dec":","
+    },
+    {
+        "name":"data_sysam/27_01_2025",
+        "date":"jan 27 2025",
+        "description":"mesures de test sur une carte d'acquisition du lycée",
+        "columns":["T", "V1"],
+        "sep":";",
+        "dec":","
+    }
+]
