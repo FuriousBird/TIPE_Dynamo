@@ -117,6 +117,8 @@ group.set_topleft(0,0)
 def blit_be4_gui():
     screen.fill((255,255,255))
 
+font = pygame.font.Font(None, 24)
+
 plot_zone = PX, PY, PW, PH = (0,100,1200,600)
 plot_loc = [0,0]
 scale_opt = [0.5,1,1.5,2,3,4,5,8,10]
@@ -201,6 +203,25 @@ while updater.playing:
             mx,my = marker
             sx,sy = time_volt_to_screen(val_min, val_max, time_min, time_max, my, mx)
             pygame.draw.circle(screen, (10,10,10), (int(sx),int(sy)), 5)
+
+        # Draw scale to the left, accounting for zoom and offset, use time_volt_to_screen and pass dummy time arguments not to be used like 0
+        for i in range(11):  # Divide the scale into 10 parts
+            value = val_min + i * (val_max - val_min) / 10
+            _, y = time_volt_to_screen(val_min, val_max, time_min, time_max, value, 0)  # Use dummy time argument
+            pygame.draw.line(screen, (0, 0, 0), (PX - 10, y), (PX, y), 2)
+            label = font.render(str(round(value, 2)), True, (0, 0, 0))
+            screen.blit(label, (PX +20, y - 10))
+
+        # Do the same scale but horizontally
+        for i in range(8*2+1):  # Divide the scale into 10 parts
+            time = time_min + i * (time_max - time_min) / 16
+            x, _ = time_volt_to_screen(val_min, val_max, time_min, time_max, 0, time)  # Use dummy value argument
+            pygame.draw.line(screen, (0, 0, 0), (x, PY + PH), (x, PY + PH - 2), 2)
+            label = font.render(str(round(time, 2)), True, (0, 0, 0))
+            screen.blit(label, (x , PY + PH -20))
+
+
+
         #showsignal
         newsig = np.copy(signal)
         ampx = PW/(time_max-time_min)

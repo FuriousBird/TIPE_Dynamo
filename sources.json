@@ -22,5 +22,13 @@
         "columns":["T", "V1"],
         "sep":";",
         "dec":","
+    },
+    {
+        "name":"data_sysam/27_05_2025",
+        "date":"mai 27 2025",
+        "description":"mesures de test sur une carte d'acquisition du lycée, effet de la distance",
+        "columns":["T", "V1"],
+        "sep":";",
+        "dec":","
     }
 ]
