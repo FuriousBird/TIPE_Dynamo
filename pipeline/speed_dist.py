@@ -12,7 +12,8 @@ print(data_files)
 
 RAYON_ROUE = 0.69/2
 PERIMETRE_ROUE = 2*3.14159*RAYON_ROUE
-NAMES_INDEX = ["mesure_proche", "mesure_loin", "mesure_med"]
+NAMES_INDEX = ["mesure1cm", "mesure2cm_bis", "mesure3cm", "mesure4cm", "mesure_proche", "mesure_loin", "mesure_med"]
+COLORS_INDEX = ["red"]*4 + ["blue", "green", "orange"]
 
 def process(x):
     line = x.strip().split(",")
@@ -64,12 +65,12 @@ Vmin = -toffset
 Vmax+= toffset
 
 for i in range(len(NAMES_INDEX)):
-    plt.scatter(V_mesures[i], ampl_mesures[i], label=NAMES_INDEX[i])
+    plt.scatter(V_mesures[i], ampl_mesures[i], label=NAMES_INDEX[i], color=COLORS_INDEX[i], marker="+")
     reg = stats.linregress(V_mesures[i], ampl_mesures[i])
 
     valsT = [Vmin, Vmax]
     valsL = [reg[1]+Vmin*reg[0], reg[1] + Vmax*reg[0]]
-    plt.plot(valsT,valsL)
+    plt.plot(valsT,valsL, color=COLORS_INDEX[i])
 
 # plt.title("fp: "+fp)
 plt.xlabel("Vitesse au sol(km/h)")
@@ -81,7 +82,6 @@ plt.show()
 
 #now perform an fft on each signal between mintime and maxtime of each label series
 #and plot the results
-plt.clf()
 plt.figure()
 for ix_to_test in range(len(NAMES_INDEX)):
     plt.subplot(len(NAMES_INDEX), 1, ix_to_test+1)

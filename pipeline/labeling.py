@@ -102,6 +102,26 @@ def save_labels():
             f.write(",".join(list(map(str, marker+(index,))))+"\n")
     print("Labels saved")
 
+def load_labels():
+    global markers
+    if prevname is None:
+        return
+    print("Loading labels")
+    try:
+        with open("../labels/" + prevname.split(".")[0] + ".txt", "r") as f:
+            markers = []
+            for line in f:
+                parts = line.strip().split(",")
+                if len(parts) >= 2:
+                    time, value = map(float, parts[:2])
+                    markers.append((time, value))
+        print("Labels loaded:", markers)
+    except FileNotFoundError:
+        print("No labels file found for", prevname)
+
+ddl3 = tp.Button(text="Load_Labels")
+ddl3.at_unclick = load_labels
+
 ddl1.at_unclick = update_sig
 
 ddl2 = tp.Button(text="Save_Labels")
@@ -109,7 +129,7 @@ ddl2.at_unclick = save_labels
 
 #to get the value of any my_ddl, just call my_ddl.get_value()
 
-group = tp.Box([ddl1_labelled, ddl2])
+group = tp.Box([ddl1_labelled, ddl2, ddl3])
 group.sort_children("h")
 # group.set_size((1200, 100))
 group.set_topleft(0,0)

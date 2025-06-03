@@ -46,6 +46,9 @@ for source in SOURCES:
             file.write(",".join(source["columns"])+"\n")
             for line in generator:
                 file.write(",".join(map(str,line))+"\n")
+        with open("out.txt", "a") as out_file:
+            out_file.write(f"{f}\n")
+
 
 
 
