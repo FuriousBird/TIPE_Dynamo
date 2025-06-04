@@ -4,6 +4,7 @@ import pygame, thorpy as tp, numpy as np
 from os import listdir
 from os.path import isfile,join
 from read import read_dat, read_np
+import csv
 
 #get all files from ../data
 data_files = [f for f in listdir("../data") if isfile(join("../data", f))]
@@ -38,8 +39,10 @@ ddl1_labelled = tp.Labelled("Fichier Source", ddl1)
 
 prevname = None
 signal = None
+result = None
+hasresult = False
 def update_sig():
-    global signal, time_max, time_min, val_max, val_min, prevname, markers
+    global signal, time_max, time_min, val_max, val_min, prevname, markers, result, hasresult
     name = ddl1.get_value()
     print("Update sig received")
     if name is None or name == prevname:
@@ -57,6 +60,24 @@ def update_sig():
     val_max = signal[:,1].max()
     val_min = signal[:,1].min()
     markers = []
+
+    result_fp = RESULT_DIR+"/results_"+ name
+    print("result fp:", result_fp)
+    if isfile(result_fp):
+        print("loading result file")
+        result = read_np("results_"+name, RESULT_DIR)[1:]
+        #then fetch only the necessary columns: 0-2
+        result = result[:, 0:3]
+        #then build a new array for drawing
+        builtresult = []
+        for row in result:
+            x_start, y, delta_x = row
+            builtresult.append((x_start, y))
+            builtresult.append((x_start + delta_x, y))
+        result = np.array(builtresult)
+        hasresult = True
+    else:
+        hasresult=False
 
 def time_volt_to_rel(val_min, val_max, time_min, time_max, val, time):
     relx = (time-time_min)/(time_max-time_min)-0.5
@@ -145,6 +166,8 @@ scale_opt = [0.5,1,1.5,2,3,4,5,8,10]
 DEFAULT_SCALE_IDX = 1
 scale_index = DEFAULT_SCALE_IDX
 plot_scale = scale_opt[DEFAULT_SCALE_IDX]
+
+RESULT_DIR = "../data_processed"
 
 updater = group.get_updater()
 clock = pygame.time.Clock()
@@ -252,7 +275,16 @@ while updater.playing:
         # newsig[:,0] = (((signal[:,0]-time_min)*ampx-PW/2)*plot_scale + PW/2)+PX-plot_loc[0]*plot_scale
         # newsig[:,1] = (PH/2-(signal[:,1]-val_min)*ampy)*plot_scale+PH/2+PY-plot_loc[1]*plot_scale
         pygame.draw.aalines(screen, (0,0,0), False, tuple(newsig), 2)
-    
+
+        if hasresult:
+        # Check if a file with the same name exists in the result directory
+            newresult = np.copy(result)
+            ampx = PW/(time_max-time_min)
+            ampy = PH/(val_max-val_min)
+            newresult[:,0], newresult[:,1] = time_volt_to_screen(val_min, val_max, time_min, time_max, newresult[:,1], newresult[:,0])
+            
+            # Display the additional signal
+            pygame.draw.aalines(screen, (255,0,0), False, tuple(newresult), 2)
 
     pygame.display.update()
 pygame.quit()

@@ -2,15 +2,17 @@ from os.path import isfile,join
 from os import listdir
 import matplotlib.pyplot as plt, numpy as np
 from read import read_np
+import csv
 import scipy.stats as stats
 
 LABEL_DIR = "../labels"
+OUTPUT_DIR = "../data_processed"
 DATA_DIR = "../data"
 
 data_files = [f for f in listdir(LABEL_DIR) if isfile(join(LABEL_DIR, f))]
 print(data_files)
 
-RAYON_ROUE = 0.69/2
+RAYON_ROUE = 0.69/2 #m
 PERIMETRE_ROUE = 2*3.14159*RAYON_ROUE
 NAMES_INDEX = ["mesure1cm", "mesure2cm_bis", "mesure3cm", "mesure4cm", "mesure_proche", "mesure_loin", "mesure_med"]
 COLORS_INDEX = ["red"]*4 + ["blue", "green", "orange"]
@@ -46,19 +48,29 @@ for fp in data_files:
     nametag = fp.split(".")[0]
     signal = read_np(nametag+".csv", DATA_DIR)
     amps = []
-    T = []  
+    T = []
+    results = []  # To store the results for saving to CSV
     for i in range(len(labels)-1):
-        x1,y1,ix1 = labels[i]
-        x2,y2,ix2 = labels[i+1]
-        calculatedAmp = 0.5*np.mean(np.abs(signal[ix1:ix2+1, 1]))
+        x1, y1, ix1 = labels[i]
+        x2, y2, ix2 = labels[i+1]
+        calculatedAmp = 0.5 * np.mean(np.abs(signal[ix1:ix2+1, 1]))
         amps.append(calculatedAmp)
-        T.append(x2-x1)        
+        T.append(x2 - x1)
         ampl_mesures[idx].append(calculatedAmp)
-        temps_mesures[idx].append(x2-x1)
-        localV = PERIMETRE_ROUE/(x2-x1)*3.6
+        temps_mesures[idx].append(x2 - x1)
+        localV = PERIMETRE_ROUE / (x2 - x1) * 3.6
         V_mesures[idx].append(localV)
         if Vmax is None or localV > Vmax:
             Vmax = localV
+        # Append the result for this step
+        results.append([x1, calculatedAmp, x2 - x1, localV])
+
+    # Save results to a CSV file
+    csv_export_filepath = join(OUTPUT_DIR,f"results_{nametag}.csv")
+    with open(csv_export_filepath, mode='w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(["Start Time", "Mean Abs Value", "Duration", "Calculated Speed"])
+        csv_writer.writerows(results)
 
 toffset = 4
 Vmin = -toffset
