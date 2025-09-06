@@ -4,25 +4,26 @@ merci de ⭐ si cette repo vous a été utile, pas besoin de me créditer dans c
 sur-ce: bonne lecture! Je suis ouvert à tout push request de clarification/mise en page sur les documents d'explication.
 
 <img width="16" height="16" alt="image" src="https://github.com/user-attachments/assets/14889153-4cfe-4c81-976a-332bc530d2f6" />
-Téléchargement: Zip/git en haut à droite. écrit: "<> Code"
+Téléchargement: Zip/git en haut à droite. écrit: "**<> Code**"
 
 ### Résumé:
-Ces mesures effectuées le lundi 16 decembre 
-sont destinées a établir une relation vitesse amplitude.
+But initial: tracé de courbes/scatter vitesse/amplitude pour des mesures avec différentes distances rotor/stator.
 
-Il s'agit de réaliser le script python adapté pour leur analyse,
-pour repérer dans le signal le défaut indicateur de tour. (ASTUCE MAGIQUE ET ACCIDENTELLE!!! d'après les simulations ne fonctionnera pas si il y a trop d'aimants mais on peut faire par analyse de fréquence ou temps entre coupures du 0 après filtrage passe bas judicieux, le tout est de savoir d'où viennent les données, comment on les regroupe pour avoir plusieurs mesures cohérentes de la même expérience, et comment on les traite)
+Et redécouvrir l'effet de différent paramètres sur les résultats.
 
-- il s'agit d'une petite bosse de crête.
+Il s'agit de réaliser le script python adapté pour leur analyse, pour déduire du signal une période de révolution et avec la dimension de la roue calculer la vitesse au sol théorique. 
+
+ASTUCE MAGIQUE ET ACCIDENTELLE!!!
+
+Pour moi le signal caractéristique du tour se présente comme un décrochage ponctuel et plus long de la tension mesurée. 
 - elle s'explique par le nombre d'aimants (6) et le nb de cadrans pour les caser (7)
   ajouter un 7eme aimant aurait été inutile (alternances poles N/S) impose un nombre pair
   il y a donc un cadran sans aimant.
+  
+( d'après les simulations ne fonctionnera pas si il y a trop d'aimants car la zone "peu aimantée" disparaitra et on passera rapidement du champ d'un aimant à l'autre, l'assymétrie du dispositif sera plsu compliquée à voir. Mais on peut faire par analyse de fréquence ou temps entre coupures du 0 après filtrage passe bas judicieux, le tout est de savoir la disposition des aimants, d'où viennent les données, comment on les regroupe pour avoir plusieurs mesures cohérentes de la même expérience, et comment on les traite)
 
-Ensuite il faut utiliser les informations de temps 
-et de nombre de tour pour déduire un vitesse de rotation angulaire
+Les frottements sont désirables pour que la roue ralentisse et parcourre une large gamme de vitesses, mais ne ralentisse pas trop vite non plus car l'hypothèse de vitesse constante sur un tour ne tient alors plus. :(
 
-On pourra dans un premier temps étudier l'enveloppe du signal,
-pour si possible négliger la perte de vitesse dûe aux frottements.
 
 > commentaire en post: finalement les frottements font tout le boulot de ralentir la roue pour avoir ma courbe d'amplitude/vitesse en supposant la vitesse decroissante ~ constante sur un tour
 
