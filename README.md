@@ -3,6 +3,7 @@ merci de ⭐ si cette repo vous a été utile, pas besoin de me créditer dans c
 
 sur-ce: bonne lecture! Je suis ouvert à tout push request de clarification/mise en page sur les documents d'explication.
 
+<img width="16" height="16" alt="image" src="https://github.com/user-attachments/assets/14889153-4cfe-4c81-976a-332bc530d2f6" />
 Téléchargement: Zip/git en haut à droite. écrit: "<> Code"
 
 ### Résumé:
