@@ -52,3 +52,8 @@ on peut calculer la vitesse du vélo par rapport à la route 2\*pi\*R/T avec T l
 si on scatter les amplitudes de chaque mesure intéressante en fonction de la vitesse pour différentes distances. On montre la linéarité de l'amplitude en fonction de la vitesse. Pondérée par un facteur de distance à l'évolution plus compliquée et loin de l'idéalité (dipôle parfait cours de e-mag)
 
 ![](assets/ampl_vitesse.png)
+
+Résultats de simul superposés avec vraie mesure ~15km/h l'amplitude double est dûe au modèle de bobine plate considéré, loin de la bobine réelle qui possède une profondeur.
+Le dispositif commercial utilise aussi des fils de cuivre plus fins (plus de tours sur une même surface) sur un coeur en ferrite pour guider les lignes de champ magnétique et augmenter son flux dans la bobine et donc sa variation depuis/vers cette valeur max élevée qui se traduit en Force Electromotrice Induite -> attention à la chute de tension sur des dispositifs à faible impédance, qui peut aussi être étudiée.
+
+<img width="544" height="756" alt="image" src="https://github.com/user-attachments/assets/e4ce8f85-9739-4b9a-9b84-7244d7cee3bb" />
