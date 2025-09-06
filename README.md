@@ -34,7 +34,7 @@ Les frottements sont désirables pour que la roue ralentisse et parcourre une la
 -> **viz** (tracé des mesures au format jpeg) utile de regarder vite fait\
 -> assets (images et autres uties pour compte rendu)\
 -> sim (je sais plus... pour la vraie simul /!\ voir -> `teslametre`)\
--> ❤ **teslametre** (mesures de B(vecteur) . n (vecteur normal à la bobine) dans l'espace mm/mm sur un large carré)\
+-> ❤ **teslametre** (mesures de B(vecteur) . n (vecteur normal à la bobine) dans l'espace 5mm/5mm sur un large carré de 10cm de côté 21x21 mesures)\
   ----> mesuresB_n.csv - (les mesures en question /!\ décalage sur les x sûrement dû à un décalage de l'élément hall dans la sonde du lycée pas forcément au "0" car plastique devant pour protéger)\
   ----> mod_dist, mod_lat, et viz normalement commentés? je sais plus...\
 -> ❤ **pipeline**: gestion des fichiers de mesure et traitement du signal avec interface visuelle - voir [Pipeline.md](https://github.com/FuriousBird/TIPE_Dynamo/tree/main/pipeline#readme) pour plus  d'explication sur l'usage\
@@ -62,6 +62,11 @@ on peut calculer la vitesse du vélo par rapport à la route 2\*pi\*R/T avec T l
 si on scatter les amplitudes de chaque mesure intéressante en fonction de la vitesse pour différentes distances. On montre la linéarité de l'amplitude en fonction de la vitesse. Pondérée par un facteur de distance à l'évolution plus compliquée et loin de l'idéalité (dipôle parfait cours de e-mag)
 
 ![](assets/ampl_vitesse.png)
+
+Mesures de champ mag, carto: forte possibilité d'erreur au centre car valeur importante et décroissance latérale très rapide
+
+<img width="463" height="495" alt="Untitled" src="https://github.com/user-attachments/assets/4ee05938-da45-4b84-8b4c-a1b8bf9f7aed" />
+
 
 Résultats de simul superposés avec vraie mesure ~15km/h l'amplitude double est dûe au modèle de bobine plate considéré, loin de la bobine réelle qui possède une profondeur.
 Le dispositif commercial utilise aussi des fils de cuivre plus fins (plus de tours sur une même surface) sur un coeur en ferrite pour guider les lignes de champ magnétique et augmenter son flux dans la bobine et donc sa variation depuis/vers cette valeur max élevée qui se traduit en Force Electromotrice Induite -> attention à la chute de tension sur des dispositifs à faible impédance, qui peut aussi être étudiée.
