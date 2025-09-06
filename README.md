@@ -3,6 +3,8 @@ merci de ⭐ si cette repo vous a été utile, pas besoin de me créditer dans c
 
 sur-ce: bonne lecture! Je suis ouvert à tout push request de clarification/mise en page sur les documents d'explication.
 
+Téléchargement: Zip/git en haut à droite.
+
 ### Résumé:
 Ces mesures effectuées le lundi 16 decembre 
 sont destinées a établir une relation vitesse amplitude.
