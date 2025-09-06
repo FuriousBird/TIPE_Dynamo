@@ -1,7 +1,7 @@
 ### Préambule:
 merci de ⭐ si cette repo vous a été utile, pas besoin de me créditer dans ce cas.
 
-sur-ce: bonne lecture!
+sur-ce: bonne lecture! Je suis ouvert à tout push request de clarification/mise en page sur les documents d'explication.
 
 ### Résumé:
 Ces mesures effectuées le lundi 16 decembre 
