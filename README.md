@@ -1,3 +1,8 @@
+### Préambule:
+merci de ⭐ si cette repo vous a été utile, pas besoin de me créditer dans ce cas.
+
+sur-ce: bonne lecture!
+
 ### Résumé:
 Ces mesures effectuées le lundi 16 decembre 
 sont destinées a établir une relation vitesse amplitude.
