@@ -28,17 +28,18 @@ Les frottements sont désirables pour que la roue ralentisse et parcourre une la
 > commentaire en post: finalement les frottements font tout le boulot de ralentir la roue pour avoir ma courbe d'amplitude/vitesse en supposant la vitesse decroissante ~ constante sur un tour
 
 ### contenu du répertoire:
+❤ = important
 
 -> data & data_old (mesures au format csv)\
--> viz (tracé des mesures au format jpeg)\
+-> **viz** (tracé des mesures au format jpeg) utile de regarder vite fait\
 -> assets (images et autres uties pour compte rendu)\
 -> sim (je sais plus... pour la vraie simul /!\ voir -> `teslametre`)\
--> teslametre (mesures de B(vecteur) . n (vecteur normal à la bobine) dans l'espace mm/mm sur un large carré)\
+-> ❤ **teslametre** (mesures de B(vecteur) . n (vecteur normal à la bobine) dans l'espace mm/mm sur un large carré)\
   ----> mesuresB_n.csv - (les mesures en question /!\ décalage sur les x sûrement dû à un décalage de l'élément hall dans la sonde du lycée pas forcément au "0" car plastique devant pour protéger)\
   ----> mod_dist, mod_lat, et viz normalement commentés? je sais plus...\
--> pipeline: gestion des fichiers de mesure et traitement du signal avec interface visuelle - voir [Pipeline.md](https://github.com/FuriousBird/TIPE_Dynamo/tree/main/pipeline#readme) pour plus  d'explication sur l'usage\
+-> ❤ **pipeline**: gestion des fichiers de mesure et traitement du signal avec interface visuelle - voir [Pipeline.md](https://github.com/FuriousBird/TIPE_Dynamo/tree/main/pipeline#readme) pour plus  d'explication sur l'usage\
   ----> labeling.py: outil visuel de pointage (que si les choses à pointées sont centrées sur le 0 mais modifiable rapidos avec chatGpt *wink wink*\
-  ----> speed_dist.py/speed_dist.ipynb: utilise les mesures spécifiées dans [/interesting_mes.txt](https://github.com/FuriousBird/TIPE_Dynamo/blob/main/interesting_mes.txt) pour tracer les courbes vitesse / amplitude (à modifier en fait je sais plus ce qu'il fait exactement)\
+  ----> ❤ **speed_dist.py/speed_dist.ipynb**: utilise les mesures spécifiées dans [/interesting_mes.txt](https://github.com/FuriousBird/TIPE_Dynamo/blob/main/interesting_mes.txt) pour tracer les courbes vitesse / amplitude (à modifier en fait je sais plus ce qu'il fait exactement)\
 main.py\
 ⚠ MCOT PAS EXEMPLAIRE (CATASTROPHE mais c'est passé)\
 tout ce qui touche à reelight et son dispositif d'induction est accessible en démontant votre dispositif perso avec du matériel de consommateur et je me dégage de toute responsabilité sur l'utilisation que vous ferez de ces infos, le dispositif pouvant être breveté, je peux seulement conclure qu'ils utilisent les effets magnétiques démontrés dans ce TIPE pour optimiser leur circuit.\
