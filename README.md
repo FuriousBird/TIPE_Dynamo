@@ -22,7 +22,7 @@ Pour moi le signal caractéristique du tour se présente comme un décrochage po
   
 ( d'après les simulations ne fonctionnera pas si il y a trop d'aimants car la zone "peu aimantée" disparaitra et on passera rapidement du champ d'un aimant à l'autre, l'assymétrie du dispositif sera plsu compliquée à voir. Mais on peut faire par analyse de fréquence ou temps entre coupures du 0 après filtrage passe bas judicieux, le tout est de savoir la disposition des aimants, d'où viennent les données, comment on les regroupe pour avoir plusieurs mesures cohérentes de la même expérience, et comment on les traite)
 
-Les frottements sont désirables pour que la roue ralentisse et parcourre une large gamme de vitesses, mais ne ralentisse pas trop vite non plus car l'hypothèse de vitesse constante sur un tour ne tient alors plus. :(
+Les frottements sont désirables pour que la roue ralentisse et parcourre une large gamme de vitesses sur un temps de mesure raisonnable, mais ne ralentisse pas trop vite non plus car l'hypothèse de vitesse constante sur un tour ne tient alors plus. :(
 
 
 > commentaire en post: finalement les frottements font tout le boulot de ralentir la roue pour avoir ma courbe d'amplitude/vitesse en supposant la vitesse decroissante ~ constante sur un tour
