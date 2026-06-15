@@ -7,25 +7,31 @@ sur-ce: bonne lecture! Je suis ouvert à tout push request de clarification/mise
 Téléchargement: Zip/git en haut à droite. écrit: "**<> Code**"
 
 ### Résumé:
-But initial: tracé de courbes/scatter vitesse/amplitude pour des mesures avec différentes distances rotor/stator.
+L'objectif de ce  TIPE était de retrouver par la mesure des résultats physiques théoriques étudiés en cours (lois de maxwell etc...).
+Le tout sur un dispositif de dynamo de vélo sans contact (inspiré de la techno Reelight) et de voir les approximations envisageables pour simuler un tel dispositif.
 
-Et redécouvrir l'effet de différent paramètres sur les résultats.
+Une première étape a été de faire un système de fixation d'aimants sur la roue du vélo et faire des bobines adaptées au dispositif, juste assez larges pour observer une fem induite mesurable.
 
-Il s'agit de réaliser le script python adapté pour leur analyse, pour déduire du signal une période de révolution et avec la dimension de la roue calculer la vitesse au sol théorique. 
+Par le tracé de courbes/scatter vitesse/amplitude pour des mesures avec différentes distances rotor/stator on peut observer l'influence de la vitesse sur l'amplitude en sortie.
 
-ASTUCE MAGIQUE ET ACCIDENTELLE!!!
+Un des challenge a été de réaliser le script python adapté pour leur analyse, pour déduire du signal une période de révolution et avec la dimension de la roue calculer la vitesse au sol théorique. 
 
+AVEC UNE ASTUCE MAGIQUE ET ACCIDENTELLE:
 Pour moi le signal caractéristique du tour se présente comme un décrochage ponctuel et plus long de la tension mesurée. 
 - elle s'explique par le nombre d'aimants (6) et le nb de cadrans pour les caser (7)
-  ajouter un 7eme aimant aurait été inutile (alternances poles N/S) impose un nombre pair
-  il y a donc un cadran sans aimant.
+  ajouter un 7eme aimant aurait été inutile pour avoir une alternance de poles N/S et maximiser la variation de flux on impose typiquement un nombre pair d'aimants
+  et il y a donc un cadran sans aimant sur mon montage => peu de flux du champ magnétique => où la tension est vraiment faible.
   
-( d'après les simulations ne fonctionnera pas si il y a trop d'aimants car la zone "peu aimantée" disparaitra et on passera rapidement du champ d'un aimant à l'autre, l'assymétrie du dispositif sera plsu compliquée à voir. Mais on peut faire par analyse de fréquence ou temps entre coupures du 0 après filtrage passe bas judicieux, le tout est de savoir la disposition des aimants, d'où viennent les données, comment on les regroupe pour avoir plusieurs mesures cohérentes de la même expérience, et comment on les traite)
+( d'après les simulations cette méthode par pointage ne fonctionnera sans doute pas si il y a trop d'aimants car la zone "peu aimantée" disparaitra et on passera rapidement du champ d'un aimant à l'autre, l'assymétrie du dispositif sera plsu compliquée à voir. Mais on peut faire par analyse de fréquence ou temps entre coupures du 0 après filtrage passe bas judicieux, le tout est de savoir la disposition des aimants, d'où viennent les données, comment on les regroupe pour avoir plusieurs mesures cohérentes de la même expérience, et comment on les traite)
+
+
 
 Les frottements sont désirables pour que la roue ralentisse et parcourre une large gamme de vitesses sur un temps de mesure raisonnable, mais ne ralentisse pas trop vite non plus car l'hypothèse de vitesse constante sur un tour ne tient alors plus. :(
+L'appareil de mesure utilisé et la longueur maximale de l'enregistrement importe aussi. A des vitesses raisonnables un sampling rate 1kHz suffit à avoir des courbes bien échantillonées mais me limitait à ~8sec d'enregistrement.
 
+Attention aussi au matériau de l'axe support pour la bobine, un axe en aluminium fait baisser la fem induite, tandis qu'un axe en fer l'augmente mais en ajoutant un problème de fixation: quand aimant passe il est viollemment attiré vers celui-ci.
 
-> commentaire en post: finalement les frottements font tout le boulot de ralentir la roue pour avoir ma courbe d'amplitude/vitesse en supposant la vitesse decroissante ~ constante sur un tour
+Pour les aimants: des aimants en néodyme rectangulaires ont été utilisés.
 
 ### contenu du répertoire:
 ❤ = important
