@@ -82,3 +82,9 @@ Résultats de simul superposés avec vraie mesure ~15km/h l'amplitude double est
 Le dispositif commercial utilise aussi des fils de cuivre plus fins (plus de tours sur une même surface) sur un coeur en ferrite pour guider les lignes de champ magnétique et augmenter son flux dans la bobine et donc sa variation depuis/vers cette valeur max élevée qui se traduit en Force Electromotrice Induite -> attention à la chute de tension sur des dispositifs à faible impédance, qui peut aussi être étudiée
 
 <img width="544" height="756" alt="image" src="https://github.com/user-attachments/assets/e4ce8f85-9739-4b9a-9b84-7244d7cee3bb" />
+
+### Pour continuer:
+
+Le dispositif de redressement de tension aurait pu faire l'objet d'une étude plus approfondie.
+Après avoir démonté le système de Reelight, j'ai pu voir qu'ils utilisaient des transistors et non simplement des diodes pour redresser la tension et faire fonctionner une LED.
+Un complément sera ajouté si j'ai le temps car je travaille actuellement sur un petit projet pour faire ça sur mon vélo.
