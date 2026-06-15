@@ -73,8 +73,12 @@ Mesures de champ mag, carto: forte possibilité d'erreur au centre car valeur im
 
 <img width="463" height="495" alt="Untitled" src="https://github.com/user-attachments/assets/4ee05938-da45-4b84-8b4c-a1b8bf9f7aed" />
 
+Schéma de simulation:
+(bobine carrée, champ uniforme selon l'axe z (aimant rectangulaire long),  
+
+<img width="568" height="351" alt="image" src="https://github.com/user-attachments/assets/14b5931f-4384-4263-bf05-02938db98805" />
 
 Résultats de simul superposés avec vraie mesure ~15km/h l'amplitude double est dûe au modèle de bobine plate considéré, loin de la bobine réelle qui possède une profondeur.
-Le dispositif commercial utilise aussi des fils de cuivre plus fins (plus de tours sur une même surface) sur un coeur en ferrite pour guider les lignes de champ magnétique et augmenter son flux dans la bobine et donc sa variation depuis/vers cette valeur max élevée qui se traduit en Force Electromotrice Induite -> attention à la chute de tension sur des dispositifs à faible impédance, qui peut aussi être étudiée.
+Le dispositif commercial utilise aussi des fils de cuivre plus fins (plus de tours sur une même surface) sur un coeur en ferrite pour guider les lignes de champ magnétique et augmenter son flux dans la bobine et donc sa variation depuis/vers cette valeur max élevée qui se traduit en Force Electromotrice Induite -> attention à la chute de tension sur des dispositifs à faible impédance, qui peut aussi être étudiée
 
 <img width="544" height="756" alt="image" src="https://github.com/user-attachments/assets/e4ce8f85-9739-4b9a-9b84-7244d7cee3bb" />
